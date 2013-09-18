@@ -6,62 +6,55 @@ class AreTheyAllTest < Minitest::Test
 
   def test_not_all_zeros
     numbers = [0, 0, 0, 0, 1, 0, 0, 0]
-    all_zeros = false
-    remaining = []
+    all_zeros = true
     numbers.each do |number|
-      remaining << number if number != 0
+      all_zeros = false unless number == 0
     end
-    refute_equal all_zeros, remaining
+    refute all_zeros
   end
 
   def test_all_zeros
     numbers = [0, 0, 0, 0, 0, 0, 0, 0]
-    all_zeros = [0, 0, 0, 0, 0, 0, 0, 0]
-    remaining = []
-    numbers.each do |num|
-      remaining << num if num == 0
+    all_zeros = false
+    numbers.each do |number|
+      all_zeros = true if number == 0
     end
-    assert_equal all_zeros, remaining
+    assert all_zeros
   end
 
   def test_all_gone
     words = %w(gone gone gone gone gone gone gone)
-    all_gone = %w(gone gone gone gone gone gone gone)
-    remaining = []
+    all_gone = false
     words.each do |word|
-      remaining << word if word == 'gone'
+      all_gone = true if word = 'gone'
     end
-    assert_equal all_gone, remaining
+    assert all_gone
   end
 
   def test_not_all_gone
     words = %w(gone gone gone gone gone gone gone yepp)
-    all_gone = %w(gone gone gone gone gone gone gone yepp)
-    remaining = []
+    all_gone = true
     words.each do |word|
-      remaining << word if word != 'gone'
+      all_gone = false if word == 'gone'
     end
-    refute_equal all_gone, remaining
+    refute all_gone
   end
 
   def test_all_empty
     words = ["", "", "", "", ""]
-    all_empty = ["", "", "", ""]
-    remaining = []
+    all_empty = false
     words.each do |word|
-      remaining << word if word == ""
+      all_empty = true if word == ''
     end
-    assert all_empty, remaining
+    assert all_empty
   end
 
   def test_not_all_empty
     words = ["full", "", "", "", "", ""]
-    all_empty =["full", "", "", "", "", ""]
-    remaining = []
+    all_empty = true
     words.each do |word|
-      remaining << word if word != ""
+      all_empty = false unless word == ''
     end
-    refute_equal all_empty, remaining
+    refute all_empty
   end
 end
-
